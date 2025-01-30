@@ -3,6 +3,7 @@
 exports.handler = async (event, context) => {
  // 1. Define allowed origins (ONLY Squarespace & your domain can call this function)
   const allowedOrigins = [
+   "https://www.squarespace.com/",
     "https://bluebird-tarantula-djcw.squarespace.com/",
     "https://www.scarevision.co.uk"
   ];
