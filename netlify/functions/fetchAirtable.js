@@ -14,7 +14,7 @@ exports.handler = async (event, context) => {
   try {
     // 3. Build the Airtable REST API URL
     //    This example fetches up to 5 records; adjust if needed.
-    const url = `https://api.airtable.com/v0/${baseId}/${tableName}?maxRecords=200`;
+    const url = `https://api.airtable.com/v0/${baseId}/${tableName}?maxRecords=300`;
 
     // 4. Use fetch (Netlify runs on Node 18 by default, which supports fetch)
     const response = await fetch(url, {
