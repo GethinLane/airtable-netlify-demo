@@ -1,6 +1,24 @@
 // Netlify Serverless Function for fetching Airtable data without exposing the API key
 
 exports.handler = async (event, context) => {
+const allowedOrigins = [
+    "https://bluebird-tarantula-djcw.squarespace.com",  // Your live site
+    "https://bluebird-tarantula-djcw.squarespace.com/config/pages",  // Squarespace Editor
+    "https://www.scarevision.co.uk"  // If you use a custom domain
+  ];
+
+  const requestOrigin = event.headers.origin || event.headers.referer || '';
+
+  if (!allowedOrigins.some(origin => requestOrigin.startsWith(origin))) {
+    return {
+      statusCode: 403,
+      headers: {
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': requestOrigin,  // Allow browser to see the error
+      },
+      body: JSON.stringify({ success: false, error: "Access denied" }),
+    };
+  }
   
   // 1. Read environment variables (Set these in Netlify later)
   const airtableApiKey = process.env.AIRTABLE_API_KEY;  // patXXXX...
